@@ -13,11 +13,11 @@ void FS_InitFile(FSFile* p_file)
 	p_file->stat = 0;
 }
 
-BOOL FS_OpenFile(FSFile* p_file, const char* path)
+DBOOL FS_OpenFile(FSFile* p_file, const char* path)
 {
 	char buf[256];
 	size_t size;
-	sprintf(buf, "data/%s", path);
+	sprintf(buf, "%s", path);
 	p_file->stdio_file = fopen(buf, "rb");
 	if(!p_file->stdio_file)
 		return FALSE;
@@ -30,7 +30,7 @@ BOOL FS_OpenFile(FSFile* p_file, const char* path)
 	return TRUE;
 }
 
-BOOL FS_CloseFile(FSFile* p_file)
+DBOOL FS_CloseFile(FSFile* p_file)
 {
 	if(!FSi_SendCommand(p_file, FS_COMMAND_CLOSEFILE))
 		return FALSE;
@@ -47,7 +47,7 @@ int FS_ReadFile(FSFile* p_file, void* dst, int len)
 	return (int) sz;
 }
 
-BOOL FS_SeekFile(FSFile *p_file, s32 offset, FSSeekFileMode origin)
+DBOOL FS_SeekFile(FSFile *p_file, s32 offset, FSSeekFileMode origin)
 {
 	switch(origin) {
 		case FS_SEEK_SET:
@@ -75,7 +75,7 @@ BOOL FS_SeekFile(FSFile *p_file, s32 offset, FSSeekFileMode origin)
 }
 
 /* PC version */
-BOOL FSi_SendCommand(FSFile *p_file, FSCommandType command)
+DBOOL FSi_SendCommand(FSFile *p_file, FSCommandType command)
 {
 	switch(command) {
 		case FS_COMMAND_CLOSEFILE:

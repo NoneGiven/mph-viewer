@@ -1,3 +1,8 @@
+#ifdef _WIN32
+#undef WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -78,7 +83,7 @@ typedef struct {
 	u32	biYPelsPerMeter;
 	u32	biClrUsed;
 	u32	biClrImportant;
-} __attribute__((packed, aligned(1))) BMP;
+}/* __attribute__((packed, aligned(1)))*/ BMP;
 
 unsigned int frame_count = 0;
 bool dump_frames = false;
@@ -397,13 +402,17 @@ int main(int argc, char **argv)
 		argc -= 2;
 		argv += 2;
 	}
-	if(argc != 1 && argc != 2) {
-		printf("Metroid Prime Hunters model viewer\n");
-		printf("Usage: dsgraph <id> [layer-mask]\n");
-		exit(0);
-	}
+	//if(argc != 1 && argc != 2) {
+	//	printf("Metroid Prime Hunters model viewer\n");
+	//	printf("Usage: dsgraph <id> [layer-mask]\n");
+	//	exit(0);
+	//}
 
-	glutInit(&argc, argv);
+	int default_room_id = 95;
+	// hard coded path where the MPH filesystem is
+	chdir("D:\\Cdrv\\MPH\\_FS\\wrg-mph\\root");
+
+	glutInitOrig(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_STENCIL | GLUT_DOUBLE);
 	if(modestring) {
 		glutGameModeString(modestring);
@@ -414,7 +423,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	int room_id = atoi(argv[0]);
+	int room_id = argc < 1 ? default_room_id : atoi(argv[0]);
 	if(argc > 1) {
 		layer_mask = compute_mask(argv[1]);
 		printf("overriding layer mask with 0x%x\n", layer_mask);

@@ -44,7 +44,7 @@ char* itoa(int value, char* buf, int base)
 		buf[i++] = '-';
 
 	buf[i] = 0;
-	strrev(buf);
+	_strrev(buf);
 
 	return buf;
 }

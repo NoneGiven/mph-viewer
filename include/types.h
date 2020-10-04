@@ -15,11 +15,13 @@
 #define	f32	float
 #define	f64	double
 
+#ifndef __cplusplus
 typedef	char	bool;
+#endif
 #define	true	1
 #define	false	0
 
-#define	BOOL	int
+#define	DBOOL	int
 #define	TRUE	1
 #define	FALSE	0
 

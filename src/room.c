@@ -1,3 +1,8 @@
+#ifdef _WIN32
+#undef WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+#endif
+
 #include <GL/gl.h>
 #include <GL/glext.h>
 
@@ -26,7 +31,7 @@ CRoom* load_room(const RoomDescription* descr, fx32 x, fx32 y, fx32 z, int layer
 	room->pos.y = y;
 	room->pos.z = z;
 
-	LoadArchive(descr->archive_name, descr->archive);
+	//LoadArchive(descr->archive_name, descr->archive);
 
 	room->description = descr;
 	if(descr->layer_id) {

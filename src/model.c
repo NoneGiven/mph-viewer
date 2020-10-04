@@ -209,7 +209,7 @@ typedef struct {
 	u32		texture_animations;
 	u16		num_meshes;
 	u16		num_texture_matrices;
-} __attribute__((__packed__)) HEADER;
+}/* __attribute__((__packed__))*/ HEADER;
 
 #ifdef _WIN32
 PFNGLCREATESHADERPROC		glCreateShader;	
@@ -527,7 +527,7 @@ unsigned int crc32(u8* data, u32 len) {
 	while(len--) {
 		crc = crc ^ data[i];
 		for (j = 7; j >= 0; j--) {
-			mask = -(crc & 1);
+			mask = 1u + ~(crc & 1);
 			crc = (crc >> 1) ^ (0xEDB88320 & mask);
 		}
 		i++;
@@ -828,7 +828,7 @@ static void build_meshes(CModel* scene, Mesh* meshes, Dlist* dlists, unsigned in
 
 	for(i = 0, mesh = meshes, m = scene->meshes; i < mesh_count; mesh++, m++, i++) {
 		Dlist* dlist = &dlists[mesh->dlistid];
-		u32* data = (u32*) (scenedata + dlist->start_ofs);
+		u32* data = (u32*) ((char*)scenedata + dlist->start_ofs);
 		m->matid = mesh->matid;
 		m->dlistid = mesh->dlistid;
 		if(scene->dlists[m->dlistid] != -1)

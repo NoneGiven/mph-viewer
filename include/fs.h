@@ -89,12 +89,12 @@ static inline u32 FS_GetPosition(const FSFile *p_file)
 }
 
 void	FS_InitFile(FSFile* p_file);
-BOOL	FS_OpenFile(FSFile* p_file, const char* path);
-BOOL	FS_CloseFile(FSFile* p_file);
+DBOOL	FS_OpenFile(FSFile* p_file, const char* path);
+DBOOL	FS_CloseFile(FSFile* p_file);
 int	FS_ReadFile(FSFile* p_file, void* dst, int len);
-BOOL	FS_SeekFile(FSFile *p_file, s32 offset, FSSeekFileMode origin);
+DBOOL	FS_SeekFile(FSFile *p_file, s32 offset, FSSeekFileMode origin);
 
 /* internal */
-BOOL	FSi_SendCommand(FSFile *p_file, FSCommandType command);
+DBOOL	FSi_SendCommand(FSFile *p_file, FSCommandType command);
 
 #endif

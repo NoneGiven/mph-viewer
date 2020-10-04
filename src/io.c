@@ -1,6 +1,7 @@
 #include <string.h>
 
 #include "error.h"
+#include "fs.h"
 #include "heap.h"
 #include "io.h"
 #include "archive.h"
@@ -28,7 +29,7 @@ int LoadFile(void** out, const char* filename)
 
 int LoadFileFromArchive(void** out, const char* filename)
 {
-	char name[32];
+	/*char name[32];
 	char* file;
 	char* slash = strchr(filename, '/');
 	if(!slash)
@@ -38,5 +39,13 @@ int LoadFileFromArchive(void** out, const char* filename)
 	name[(int) (slash - filename)] = 0;
 	file = slash + 1;
 
-	return LoadFromArchive(out, name, file);
+	return LoadFromArchive(out, name, file);*/
+
+	const char* prefix = "_archives/";
+	char* full;
+	full = malloc(strlen(prefix) + strlen(filename));
+	strcpy(full, prefix);
+	strcat(full, filename);
+	filename = full;
+	return LoadFile(out, filename);
 }

@@ -51,7 +51,7 @@ void setup_room_portals()
 
 			room_info->portal = NULL;
 			for(room_id = 0; room_id < NUM_ROOMS; room_id++) {
-				if(!strcasecmp(rooms[room_id].name, room_name)) {
+				if(!_stricmp(rooms[room_id].name, room_name)) {
 					room_info->room_id = room_id;
 					break;
 				}
@@ -61,9 +61,9 @@ void setup_room_portals()
 			prev_room_info = room_info;
 
 			v4 = 0x1000;
-			if(!strcasecmp(room_name, "UNIT2_C2")) {
+			if(!_stricmp(room_name, "UNIT2_C2")) {
 				v4 = 0x20CC;
-			} else if(!strcasecmp(room_name, "UNIT2_C3")) {
+			} else if(!_stricmp(room_name, "UNIT2_C3")) {
 				v4 = 0x14E1;
 			}
 			// parse_door_and_teleporter_entities(ent_filename, room_name_info, ((unsigned int)something_with_layer_id >> 2 * game_state.area_id) & 3, v4);

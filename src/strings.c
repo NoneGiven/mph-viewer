@@ -33,7 +33,7 @@ void parse_stringtable(StringTableEntry* entries, RawStringTableEntry* raw_entri
 		dst->length = src->length;
 		dst->speed = src->speed;
 		dst->category = src->category;
-		dst->string = strdup(raw_data + src->string);
+		dst->string = _strdup(raw_data + src->string);
 	}
 }
 
@@ -42,7 +42,7 @@ void load_stringtable(const char* folder, const char* name, StringTable* dst)
 	StringTableFile* out = NULL;
 	char filename[64];
 
-	sprintf(filename, "%s/%s", folder, name, 0);
+	sprintf(filename, "%s\\%s", folder, name, 0);
 	LoadFile((void **)&out, filename);
 	dst->length = out->length;
 	dst->entries = (StringTableEntry*) alloc_from_heap(dst->length * sizeof(StringTableEntry));

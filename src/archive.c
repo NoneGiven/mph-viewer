@@ -83,7 +83,7 @@ int LoadFromArchive(void** out, const char* name, const char* filename)
 
 	for(i = 0; i < arc->entry_count; i++) {
 		ArchiveEntry* entry = (ArchiveEntry*) (data + 32 + i * sizeof(ArchiveEntry));
-		if(!strcasecmp(entry->name, filename)) {
+		if(!_stricmp(entry->name, filename)) {
 			int size = entry->size;
 			*out = alloc_from_heap(size);
 			if(!*out)

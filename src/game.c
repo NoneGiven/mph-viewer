@@ -1,3 +1,8 @@
+#ifdef _WIN32
+#undef WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+#endif
+
 #include <math.h>
 #include <stdlib.h>
 #include <GL/gl.h>
@@ -37,7 +42,7 @@ void GAMEInit()
 {
 	game_state.game_mode = SINGLE_PLAYER;
 
-	LoadArchive("common", "archives/common.arc");
+	//LoadArchive("common", "archives/common.arc");
 
 	load_hud_messages();
 	load_game_messages();

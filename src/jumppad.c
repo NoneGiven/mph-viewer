@@ -1,3 +1,8 @@
+#ifdef _WIN32
+#undef WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+#endif
+
 #include <stdio.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
